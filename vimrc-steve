@@ -1,0 +1,89 @@
+let mapleader = ","
+:let g:proj_flags="imstvcg"
+
+set nocompatible      " We're running Vim, not Vi!
+filetype on           " Enable filetype detection
+syntax on
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
+colorscheme desert256
+
+"allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+set showcmd
+set showmode
+set history=1000
+set display+=lastline
+set statusline=%<%f%h%m%r%=%b\ 0x%B\ \ %l,%c%V\ %P
+set laststatus=2
+set ruler
+set softtabstop=2
+set shiftwidth=2
+set smarttab
+set autoindent
+set expandtab
+set backspace=start,indent
+set paste
+set nowrap
+set linebreak
+
+set incsearch
+set hlsearch
+
+"set foldmethod=marker
+set foldmethod=indent
+set foldnestmax=3
+set nofoldenable
+
+set wildmode=list:longest   "make cmdline tab completion similar to bash
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+
+"display tabs and trailing spaces
+set list
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+
+"load ftplugins and indent files
+filetype plugin on
+filetype indent on
+
+"make <c-l> clear the highlight as well as redraw
+nnoremap <C-L> :nohls<CR><C-L>
+inoremap <C-L> <C-O>:nohls<CR>
+
+if has("gui_running")
+  set number
+endif
+
+map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+
+set t_Co=256
+highlight Pmenu ctermbg=238 gui=bold guibg=#cecece guifg=#444444
+
+"au BufWinLeave * mkview
+"au BufWinEnter * silent loadview
+
+":autocmd FileType php noremap <C-M> :w!<CR>:!/usr/bin/php %<CR>
+":autocmd FileType php noremap <C-L> :!/usr/bin/php -l %<CR>
+
+":autocmd FileType ruby noremap <C-M> :!/usr/bin/ruby -w %<CR>
+":autocmd FileType ruby noremap <C-L> :!/usr/bin/ruby -cw %<CR>
+
+":autocmd FileType perl noremap <C-M> :!/usr/bin/perl -w %<CR>
+":autocmd FileType perl noremap <C-L> :!/usr/bin/perl -cw %<CR>
+
+"jump to last cursor position when opening a file
+"dont do it when writing a commit log entry
+autocmd BufReadPost * call SetCursorPosition()
+function! SetCursorPosition()
+    if &filetype !~ 'commit\c'
+        if line("'\"") > 0 && line("'\"") <= line("$")
+            exe "normal g`\""
+        endif
+    end
+endfunction
+
+inoremap <M-o>       <Esc>o
+inoremap <C-j>       <Down>
+let g:allml_global_maps = 1
+
