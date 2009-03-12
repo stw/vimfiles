@@ -1,6 +1,6 @@
 Mostly a copy of scrooloose's vim setup, with a few tweeks of my own.
 
-git clone git@github.com:stw/vimfiles.git
+git clone git://github.com/stw/vimfiles.git
 
 ln -s Projects/vimfiles .vim
 
