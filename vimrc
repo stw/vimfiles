@@ -1,4 +1,6 @@
 let mapleader = ","
+let maplocalleader = ","
+
 colorscheme desert256
 let g:proj_flags="imstvcg"
 
@@ -15,7 +17,7 @@ set backspace=indent,eol,start
 
 "store lots of :cmdline history
 set history=1000
-set spell
+set nospell
 
 set showcmd     "show incomplete cmds down the bottom
 set showmode    "show current mode down the bottom
@@ -26,8 +28,10 @@ set hlsearch    "hilight searches by default
 set wrap      "wrap lines
 set linebreak   "wrap lines at convenient points
 
+let g:VCSCommandEnableBufferSetup=1
 "statusline setup
-set statusline=%f       "tail of the filename
+set statusline=%{exists('loaded_VCSCommand')?VCSCommandGetStatusLine():''} " show vcs status 
+set statusline+=%f       "tail of the filename
 
 "display a warning if fileformat isnt unix
 set statusline+=%#warningmsg#
